@@ -26,6 +26,12 @@ tokens = (
 def p_starting(p):
     'expres : a b iterator'
     p[0] = ("start", p[1], p[2], p[3])
+def p_starting1(p):
+    'expres : a'
+    p[0] = ("start", p[1])
+def p_starting2(p):
+    'expres : a b'
+    p[0] = ("start", p[1], p[2])
 ###### FIRST LINE (i=2) 
 def p_assignment(p):
     'a : identifier EQUAL number'
@@ -49,7 +55,7 @@ def p_argslast(p): # one argument
 ###### NEXT LINES 
 def p_iterator(p):
     'iterator : fline lines'
-    p[0] = p[1],p[2]
+    p[0] = ("iterator",p[1],p[2])
 #### first line of array.each iterator 
 def p_fline(p):
     'fline : arrayeach tag operator identifier operator'
@@ -58,6 +64,10 @@ def p_fline(p):
 def p_lines(p):
     'lines : lines lines'
     p[0]=("lines",p[1],p[2])
+#### no lines in iterator
+def p_linesempty(p):
+    'lines : '
+    p[0] = []
 ## printing a string
 def p_lines1(p):
     'lines : puts STRING'
@@ -66,6 +76,7 @@ def p_lines1(p):
 def p_lines2(p):
     'lines : puts number'
     p[0] = ("PRINT",p[2])
+
 ## adding a number to tag
 def p_addnum(p):
     'lines : identifier EQUAL identifier operator number'
@@ -95,3 +106,46 @@ jsparser = yacc.yacc()
 data=fileread()
 jsast = jsparser.parse(data,lexer=jslexer)
 print jsast
+
+###################### Interpretor##############
+def eval_exp(tree):
+    node = tree[0]
+    if node == "number":
+        return int(tree[1])
+    elif node == "start":
+        left_child = tree[1]
+        mid_child = tree[2]
+        right_child = tree[3]
+        left_val = eval_exp(left_child)
+        mid_val = eval_exp(mid_child)
+        right_val = eval_exp(right_child)
+        print left_val
+        print mid_val
+        print right_val
+        return left_val
+    elif node == "assign":
+        left_child = tree[1]
+        right_child = int(tree[2])
+        left_child = right_child
+        return left_child
+    elif node == "arr_assign":
+        left_child = tree[1]
+        right_child = tree[2]
+        left_child = right_child
+        return left_child
+    elif node == "iterator":
+        left_child = tree[1]
+        left_val = eval_exp(left_child)
+        right_child = tree[2]
+        right_val = eval_exp(right_child)
+        return 0
+    elif node == "assign":
+        left_child = tree[1]
+        right_child = int(tree[2])
+        left_child = right_child
+        return left_child
+    elif node == "PRINT":
+        left_child = tree[1]
+        print left_child
+        return 0
+eval_exp(jsast)

@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'A5D6830B83A9854F85FDA44984CC7530'
+_lr_signature = 'E01CA64C9B6B5833EC3C11412499BD8D'
     
-_lr_action_items = {'leftbrace':([10,],[16,]),'puts':([7,13,17,18,19,32,34,35,36,37,],[12,12,-11,-12,12,-9,-16,-13,-14,-15,]),'arrayeach':([4,29,],[9,-3,]),'number':([6,12,16,20,28,30,31,],[11,18,22,26,22,35,37,]),'EQUAL':([3,5,14,],[6,10,20,]),'tag':([9,],[15,]),'COMMA':([22,],[28,]),'rightbrace':([16,22,23,24,33,],[-5,-7,29,-4,-6,]),'operator':([15,25,26,27,],[21,30,31,32,]),'STRING':([12,],[17,]),'identifier':([0,1,7,11,13,17,18,19,20,21,30,31,32,34,35,36,37,],[3,5,14,-2,14,-11,-12,14,25,27,34,36,-9,-16,-13,-14,-15,]),'$end':([2,8,13,17,18,19,34,35,36,37,],[0,-1,-8,-11,-12,-10,-16,-13,-14,-15,]),}
+_lr_action_items = {'leftbrace':([10,],[16,]),'puts':([7,13,17,18,19,32,34,35,36,37,],[12,12,-14,-15,12,-11,-19,-16,-17,-18,]),'arrayeach':([4,29,],[9,-5,]),'number':([6,12,16,20,28,30,31,],[11,18,22,26,22,35,37,]),'EQUAL':([3,5,14,],[6,10,20,]),'tag':([9,],[15,]),'COMMA':([22,],[28,]),'rightbrace':([16,22,23,24,33,],[-7,-9,29,-6,-8,]),'operator':([15,25,26,27,],[21,30,31,32,]),'STRING':([12,],[17,]),'identifier':([0,1,7,11,13,17,18,19,20,21,30,31,32,34,35,36,37,],[3,5,14,-4,14,-14,-15,14,25,27,34,36,-11,-19,-16,-17,-18,]),'$end':([1,2,4,7,8,11,13,17,18,19,29,32,34,35,36,37,],[-2,0,-3,-13,-1,-4,-10,-14,-15,-12,-5,-11,-19,-16,-17,-18,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -27,19 +27,22 @@ del _lr_goto_items
 _lr_productions = [
   ("S' -> expres","S'",1,None,None,None),
   ('expres -> a b iterator','expres',3,'p_starting','mygrammar.py',27),
-  ('a -> identifier EQUAL number','a',3,'p_assignment','mygrammar.py',31),
-  ('b -> identifier EQUAL leftbrace optionalargs rightbrace','b',5,'p_arrayassignment','mygrammar.py',35),
-  ('optionalargs -> args','optionalargs',1,'p_optionalargs','mygrammar.py',38),
-  ('optionalargs -> <empty>','optionalargs',0,'p_optionalargsempty','mygrammar.py',41),
-  ('args -> number COMMA args','args',3,'p_args','mygrammar.py',44),
-  ('args -> number','args',1,'p_argslast','mygrammar.py',47),
-  ('iterator -> fline lines','iterator',2,'p_iterator','mygrammar.py',51),
-  ('fline -> arrayeach tag operator identifier operator','fline',5,'p_fline','mygrammar.py',55),
-  ('lines -> lines lines','lines',2,'p_lines','mygrammar.py',59),
-  ('lines -> puts STRING','lines',2,'p_lines1','mygrammar.py',63),
-  ('lines -> puts number','lines',2,'p_lines2','mygrammar.py',67),
-  ('lines -> identifier EQUAL identifier operator number','lines',5,'p_addnum','mygrammar.py',71),
-  ('lines -> identifier EQUAL number operator identifier','lines',5,'p_addnum1','mygrammar.py',75),
-  ('lines -> identifier EQUAL number operator number','lines',5,'p_addnum2','mygrammar.py',79),
-  ('lines -> identifier EQUAL identifier operator identifier','lines',5,'p_addnum3','mygrammar.py',83),
+  ('expres -> a','expres',1,'p_starting1','mygrammar.py',30),
+  ('expres -> a b','expres',2,'p_starting2','mygrammar.py',33),
+  ('a -> identifier EQUAL number','a',3,'p_assignment','mygrammar.py',37),
+  ('b -> identifier EQUAL leftbrace optionalargs rightbrace','b',5,'p_arrayassignment','mygrammar.py',41),
+  ('optionalargs -> args','optionalargs',1,'p_optionalargs','mygrammar.py',44),
+  ('optionalargs -> <empty>','optionalargs',0,'p_optionalargsempty','mygrammar.py',47),
+  ('args -> number COMMA args','args',3,'p_args','mygrammar.py',50),
+  ('args -> number','args',1,'p_argslast','mygrammar.py',53),
+  ('iterator -> fline lines','iterator',2,'p_iterator','mygrammar.py',57),
+  ('fline -> arrayeach tag operator identifier operator','fline',5,'p_fline','mygrammar.py',61),
+  ('lines -> lines lines','lines',2,'p_lines','mygrammar.py',65),
+  ('lines -> <empty>','lines',0,'p_linesempty','mygrammar.py',69),
+  ('lines -> puts STRING','lines',2,'p_lines1','mygrammar.py',73),
+  ('lines -> puts number','lines',2,'p_lines2','mygrammar.py',77),
+  ('lines -> identifier EQUAL identifier operator number','lines',5,'p_addnum','mygrammar.py',82),
+  ('lines -> identifier EQUAL number operator identifier','lines',5,'p_addnum1','mygrammar.py',86),
+  ('lines -> identifier EQUAL number operator number','lines',5,'p_addnum2','mygrammar.py',90),
+  ('lines -> identifier EQUAL identifier operator identifier','lines',5,'p_addnum3','mygrammar.py',94),
 ]
